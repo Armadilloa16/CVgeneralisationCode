@@ -27,11 +27,11 @@ reshape_data_matrix = function(pMeans, clin.df) {
   return(data.w)
 }
 
-sample_size = function(clin.df) {
+get_sample_size = function(clin.df) {
   return(length(unique(subset(clin.df, Suitable)$Patient)))
 }
 
-clin_variable_name = function(d.set) {
+get_clin_variable_name = function(d.set) {
   return("LNM")
 }
 
@@ -76,7 +76,7 @@ load_sim_data = function(clas, sim, code_dir = '.') {
 
 # Custom implementation of a deterministic (as opposed to MASS::lda) LDA 
 
-lda_lw = function(x, y, verbose = TRUE) {
+train_lda = function(x, y, verbose = TRUE) {
   
   if (dim(x)[1] != length(y)) {
     stop('lda_lw: dimension mismatch')

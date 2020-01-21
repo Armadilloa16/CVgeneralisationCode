@@ -54,7 +54,7 @@ for (sim in 1:N) {
   for (k in n.dims) {
     # Fit a Fishers Linear Discriminant Analysis model to the Training data
     # using the first k principal component scores as the variables.
-    m  = lda_lw(x[, 1:k], y)
+    m  = train_lda(x[, 1:k], y)
     d = m$d
     cutoff = m$cutoff
     tmp = x[, 1:k] %*% d > cutoff
@@ -87,7 +87,7 @@ for (sim in 1:N) {
     for (k in n.dims) {
       # Fit a Fishers Linear Discriminant Analysis model to the Training data
       # using the first k principal component scores as the variables.
-      m  = lda_lw(x[1:n != i, 1:k], y[1:n != i])
+      m  = train_lda(x[1:n != i, 1:k], y[1:n != i])
       d = m$d
       cutoff = m$cutoff
 
@@ -133,7 +133,7 @@ for (sim in 1:N) {
     for (k in n.dims) {
       # Fit a Fishers Linear Discriminant Analysis model to the Training data
       # using the first k principal component scores as the variables.
-      m = lda_lw(pca$x[, 1:k], y[1:n != i])
+      m = train_lda(pca$x[, 1:k], y[1:n != i])
       d = m$d
       cutoff = m$cutoff
 
@@ -167,7 +167,7 @@ for (sim in 1:N) {
       for (k in n.dims) {
         # Fit a Fishers Linear Discriminant Analysis model to the Training data
         # using the first k principal component scores as the variables.
-        m = lda_lw(pca$x[, 1:k], y[!(1:n %in% c(i, j))])
+        m = train_lda(pca$x[, 1:k], y[!(1:n %in% c(i, j))])
         d = m$d
         cutoff = m$cutoff
         

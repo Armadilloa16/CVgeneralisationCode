@@ -18,10 +18,10 @@ clas.df.cv6 = data.frame()
 
 
 # Sample size
-n = sample_size(clin.df)
+n = get_sample_size(clin.df)
 
 # y.var is the class variable
-y.var = clin_variable_name()
+y.var = get_clin_variable_name()
 
 # The class labels.
 y = clin.df[match(data.w$Patient, clin.df$Patient), y.var]
@@ -50,7 +50,7 @@ cat("      TT\n")
 for (k in n.dims) {
   # Fit a Fishers Linear Discriminant Analysis model to the Training data
   # using the first k principal component scores as the variables.
-  m  = lda_lw(x[, 1:k], y)
+  m  = train_lda(x[, 1:k], y)
   d = m$d
   cutoff = m$cutoff
   tmp = x[, 1:k] %*% d > cutoff
@@ -75,7 +75,7 @@ for (i in 1:n) {
   for (k in n.dims) {
     # Fit a Fishers Linear Discriminant Analysis model to the Training data
     # using the first k principal component scores as the variables.
-    m = lda_lw(x[1:n != i, 1:k], y[1:n != i])
+    m = train_lda(x[1:n != i, 1:k], y[1:n != i])
     d = m$d
     cutoff = m$cutoff
 
@@ -121,7 +121,7 @@ for (i in 1:n) {
   for (k in n.dims) {
     # Fit a Fishers Linear Discriminant Analysis model to the Training data
     # using the first k principal component scores as the variables.
-    m = lda_lw(pca$x[, 1:k], y[1:n != i])
+    m = train_lda(pca$x[, 1:k], y[1:n != i])
     d = m$d
     cutoff = m$cutoff
 
@@ -154,7 +154,7 @@ for (i in 1:n) {
     for (k in n.dims) {
       # Fit a Fishers Linear Discriminant Analysis model to the Training data
       # using the first k principal component scores as the variables.
-      m = lda_lw(pca$x[, 1:k], y[!(1:n %in% c(i, j))])
+      m = train_lda(pca$x[, 1:k], y[!(1:n %in% c(i, j))])
       d = m$d
       cutoff = m$cutoff
       

@@ -17,10 +17,10 @@ misc.df.alt2 = data.frame()
 clas.df.cv6 = data.frame()
 
 # Sample size
-n = sample_size(clin.df)
+n = get_sample_size(clin.df)
 
 # y.var is the class variable
-y.var = clin_variable_name()
+y.var = get_clin_variable_name()
 
 # The class labels.
 y = clin.df[match(data.w$Patient, clin.df$Patient), y.var]
@@ -64,7 +64,7 @@ cca_rank = order(abs(phi1), decreasing = TRUE)
 
 for (k in n.dims) {
 
-  m = lda_lw(x.data[, cca_rank[1:k]], y)
+  m = train_lda(x.data[, cca_rank[1:k]], y)
   d = m$d
   cutoff = m$cutoff
 
@@ -89,7 +89,7 @@ for (i in 1:n) {
   # Then for each number of variables
   for (k in n.dims) {
 
-    m = lda_lw(x.data[1:n != i, cca_rank[1:k]], y[1:n != i])
+    m = train_lda(x.data[1:n != i, cca_rank[1:k]], y[1:n != i])
     d = m$d
     cutoff = m$cutoff
 
@@ -148,7 +148,7 @@ for (i in 1:n) {
   # Then for each number of variables in n.dims,
   for (k in n.dims) {
 
-    m = lda_lw(x.data[1:n != i, cca_rank[1:k]], y[1:n != i])
+    m = train_lda(x.data[1:n != i, cca_rank[1:k]], y[1:n != i])
     d = m$d
     cutoff = m$cutoff
 
@@ -196,7 +196,7 @@ for (i in 1:n) {
       # Then for each number of variables in n.dims,
       for (k2 in n.dims) {
         
-        m = lda_lw(x.data[!(1:n %in% c(i, j)), cca_rank[1:k2]], y[!(1:n %in% c(i, j))])
+        m = train_lda(x.data[!(1:n %in% c(i, j)), cca_rank[1:k2]], y[!(1:n %in% c(i, j))])
         d = m$d
         cutoff = m$cutoff  
         
