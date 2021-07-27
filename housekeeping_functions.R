@@ -11,7 +11,8 @@ load_clin = function() {
 }
 
 load_patient_summary = function() {
-    return(read.csv(file.path("output", "patient_summaries", 
+    return(read.csv(file.path("data", "endometrial_cancer_data", 
+                              "patient_summaries", 
                               "ETMA_logI_patient_averages.csv")))
 }
 
@@ -107,7 +108,7 @@ train_lda = function(x, y, verbose = TRUE) {
     # Rank of W
     r = min(which(Weig$values < 1e-14)[1]) - 1
     if (verbose) {
-      cat(paste(' lda_lw: r = ', r, 'when d =', d, 'next largest eigenvalue is', Weig$values[r], ''))
+      cat(paste('\n lda_lw: r = ', r, 'when d =', d, 'next largest eigenvalue is', Weig$values[r], ''))
     }
     
     # Calculate full eigen-decomposition
@@ -128,7 +129,7 @@ train_lda = function(x, y, verbose = TRUE) {
     # Small numeric errors can result in d being complex
     if (is.complex(d)) {
       if (verbose) {
-        cat(paste(' d complex with largest imaginary component', max(abs(Im(d))), ''))
+        cat(paste('\n d complex with largest imaginary component', max(abs(Im(d))), ''))
       }
       d = Re(d)
     }

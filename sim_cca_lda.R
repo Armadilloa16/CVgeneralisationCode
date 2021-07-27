@@ -12,12 +12,12 @@ for (sim in 1:N) {
   
   clas.tt = data.frame()
   clas.pop = data.frame()
-  clas.df.alt1 = data.frame()
-  misc.df.alt1 = data.frame()
-  clas.df.alt2 = data.frame()
-  misc.df.alt2 = data.frame()
+  Ecv.Pi2 = data.frame()
+  Ett.Pi2 = data.frame()
+  Ecv.Pi1 = data.frame()
+  Ett.Pi1 = data.frame()
   
-  clas.df.cv6 = data.frame()
+  Ecv.CV3 = data.frame()
   
   
   # Load simulated data
@@ -84,10 +84,10 @@ for (sim in 1:N) {
 
   }
 
-  ###################################
-  ### Alternatives 1 and 3 LOO-CV ###
-  ###################################
-  cat("      Alt1, LO:")
+  ###########################################################
+  ### Pi2 (dimension reduction on full data, then subset) ###
+  ###########################################################
+  cat("      [Pi2], LO:")
 
   # For each observation:
   for (i in 1:n) {
@@ -105,7 +105,7 @@ for (sim in 1:N) {
       # CCA1
       # Test on the same (n - 1) observations used to train the rule.
       tmp = as.matrix(sim.data[1:n != i, cca_rank[1:k]]) %*% d > cutoff
-      misc.df.alt1 = rbind(misc.df.alt1, data.frame(left.out.obs = i,
+      Ett.Pi2 = rbind(Ett.Pi2, data.frame(left.out.obs = i,
                                                     obs = (1:n)[1:n != i],
                                                     n.dims = k,
                                                     clas.assigned = tmp,
@@ -113,7 +113,7 @@ for (sim in 1:N) {
 
       # Apply that rule to the left-out test observation.
       tmp = as.matrix(sim.data[1:n == i, cca_rank[1:k]]) %*% d > cutoff
-      clas.df.alt1 = rbind(clas.df.alt1, data.frame(left.out.obs = i,
+      Ecv.Pi2 = rbind(Ecv.Pi2, data.frame(left.out.obs = i,
                                                     n.dims = k,
                                                     clas.assigned = tmp,
                                                     clas.true = y[i]))
@@ -123,10 +123,10 @@ for (sim in 1:N) {
 
 
 
-  #######################################################
-  ### Current Implementation and Alternative 2 LOO-CV ###
-  #######################################################
-  cat("      Alt2, LO:")
+  ##############################################
+  ### Pi1 (dimension reduction after subset) ###
+  ##############################################
+  cat("      [Pi1], LO:")
 
   # For each observation:
   for (i in 1:n) {
@@ -164,7 +164,7 @@ for (sim in 1:N) {
       # CCA1
       # Test on the same (n - 1) observations used to train the rule.
       tmp = as.matrix(sim.data[1:n != i, cca_rank[1:k]]) %*% d > cutoff
-      misc.df.alt2 = rbind(misc.df.alt2, data.frame(left.out.obs = i,
+      Ett.Pi1 = rbind(Ett.Pi1, data.frame(left.out.obs = i,
                                                     obs = (1:n)[1:n != i],
                                                     n.dims = k,
                                                     clas.assigned = tmp,
@@ -172,13 +172,13 @@ for (sim in 1:N) {
 
       # Apply that rule to the left-out test observation.
       tmp = as.matrix(sim.data[1:n == i, cca_rank[1:k]]) %*% d > cutoff
-      clas.df.alt2 = rbind(clas.df.alt2, data.frame(left.out.obs = i,
+      Ecv.Pi1 = rbind(Ecv.Pi1, data.frame(left.out.obs = i,
                                                     n.dims = k,
                                                     clas.assigned = tmp,
                                                     clas.true = y[i]))
     }
     
-    # CV6
+    # Double CV, i.e. [CV3] 
     for (j in which(1:n != i)) {
       # Remove that observation
       x = sim.data[!(1:n %in% c(i, j)), ]
@@ -209,7 +209,7 @@ for (sim in 1:N) {
         
         # Apply that rule to the left-out test observation.
         tmp = as.matrix(sim.data[1:n == j, cca_rank[1:k]]) %*% d > cutoff
-        clas.df.cv6 = rbind(clas.df.cv6, data.frame(left.out.obs.outer = i,
+        Ecv.CV3 = rbind(Ecv.CV3, data.frame(left.out.obs.outer = i,
                                                     left.out.obs.inner = j,
                                                     n.dims = k,
                                                     clas.assigned = tmp,
@@ -229,28 +229,28 @@ for (sim in 1:N) {
                                 paste0("cca_lda_pop_", toString(sim), ".csv")),
             row.names = FALSE)
 
-  write.csv(clas.df.alt1, file.path("data", "sim_results",
-                                    paste0("cca_lda_alt1_loo_cv_",
+  write.csv(Ecv.Pi2, file.path("data", "sim_results",
+                                    paste0("cca_lda_Pi2_Ecv_",
                                            toString(sim), ".csv")),
             row.names = FALSE)
 
-  write.csv(misc.df.alt1, file.path("data", "sim_results",
-                                    paste0("cca_lda_alt1_loo_tt_",
+  write.csv(Ett.Pi2, file.path("data", "sim_results",
+                                    paste0("cca_lda_Pi2_Ett_",
                                            toString(sim), ".csv")),
             row.names = FALSE)
-  write.csv(clas.df.alt2, file.path("data", "sim_results",
-                                    paste0("cca_lda_alt2_loo_cv_",
+  write.csv(Ecv.Pi1, file.path("data", "sim_results",
+                                    paste0("cca_lda_Pi1_Ecv_",
                                            toString(sim), ".csv")),
             row.names = FALSE)
 
-  write.csv(misc.df.alt2, file.path("data", "sim_results",
-                                    paste0("cca_lda_alt2_loo_tt_",
+  write.csv(Ett.Pi1, file.path("data", "sim_results",
+                                    paste0("cca_lda_Pi1_Ett_",
                                            toString(sim), ".csv")),
             row.names = FALSE)
   
   
-  write.csv(clas.df.cv6, file.path("data", "sim_results",
-                                    paste0("cca_lda_cv6_loo_cv_",
+  write.csv(Ecv.CV3, file.path("data", "sim_results",
+                                    paste0("cca_lda_CV3_Ecv_",
                                            toString(sim), ".csv")),
             row.names = FALSE)
   

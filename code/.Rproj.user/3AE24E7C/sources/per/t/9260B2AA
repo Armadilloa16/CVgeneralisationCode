@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1611905237284.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3305047032",
+    "id" : "9260B2AA",
+    "lastKnownWriteTime" : 1611905889,
+    "last_content_update" : 1611905889102,
+    "path" : "~/Dropbox/UWA/CV/PNAS/code/summarise_results.R",
+    "project_path" : "summarise_results.R",
+    "properties" : {
+        "cursorPosition" : "213,64",
+        "scrollLine" : "202"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

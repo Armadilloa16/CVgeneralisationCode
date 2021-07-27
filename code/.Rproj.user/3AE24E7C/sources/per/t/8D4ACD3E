@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1611911125735.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "769793545",
+    "id" : "8D4ACD3E",
+    "lastKnownWriteTime" : 1611911675,
+    "last_content_update" : 1611911675471,
+    "path" : "~/Dropbox/UWA/CV/PNAS/code/paper_figures.R",
+    "project_path" : "paper_figures.R",
+    "properties" : {
+        "cursorPosition" : "125,2",
+        "scrollLine" : "112"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

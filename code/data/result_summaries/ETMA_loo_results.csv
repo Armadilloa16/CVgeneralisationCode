@@ -1,0 +1,11 @@
+"method","n.dims","err","n.dims.min","n.dims.max","CV","Pi"
+"CCA-LDA",15,11,NA,NA,1,1
+"PCA-LDA",4,14,NA,NA,1,1
+"CCA-LDA",16,6,NA,NA,1,2
+"PCA-LDA",35,9,NA,NA,1,2
+"CCA-LDA",NA,20,24,38,2,1
+"PCA-LDA",NA,19,22,35,2,1
+"CCA-LDA",NA,7,12,18,2,2
+"PCA-LDA",NA,19,23,33,2,2
+"CCA-LDA",NA,13,3,38,3,1
+"PCA-LDA",NA,15,4,35,3,1

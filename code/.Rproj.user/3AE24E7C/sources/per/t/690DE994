@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1611726263111.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3362278102",
+    "id" : "690DE994",
+    "lastKnownWriteTime" : 1611911150,
+    "last_content_update" : 1611911150592,
+    "path" : "~/Dropbox/UWA/CV/PNAS/code/sim_summarise_results.R",
+    "project_path" : "sim_summarise_results.R",
+    "properties" : {
+        "cursorPosition" : "381,0",
+        "scrollLine" : "358"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
